@@ -6,7 +6,7 @@ jest.useFakeTimers()
 test("refresh token about to expire", () => {
   const callback = jest.fn()
 
-  const auth = {
+  const $auth = {
     strategies: {
       refresh: {
         token: {
@@ -34,7 +34,7 @@ test("refresh token about to expire", () => {
     refreshTokens: callback,
   } as any
 
-  plugin({ $auth: auth })
+  plugin({ $auth })
 
   jest.runOnlyPendingTimers()
 
@@ -79,10 +79,10 @@ test("do not refresh not expiring soon", () => {
   expect(callback).toBeCalledTimes(0)
 })
 
-test("multiple strategies", ()=> {
+test("multiple strategies", () => {
   const callback = jest.fn()
 
-  const auth = {
+  const $auth = {
     strategies: {
       refreshIrrlevant: {
         token: {
@@ -132,7 +132,7 @@ test("multiple strategies", ()=> {
     refreshTokens: callback,
   } as any
 
-  plugin({ $auth: auth })
+  plugin({ $auth })
 
   jest.runOnlyPendingTimers()
 
@@ -142,7 +142,7 @@ test("multiple strategies", ()=> {
 test("ignore expired token", () => {
   const callback = jest.fn()
 
-  const auth = {
+  const $auth = {
     strategies: {
       refresh: {
         token: {
@@ -170,7 +170,7 @@ test("ignore expired token", () => {
     refreshTokens: callback,
   } as any
 
-  plugin({ $auth: auth })
+  plugin({ $auth })
 
   jest.runOnlyPendingTimers()
 
@@ -180,7 +180,7 @@ test("ignore expired token", () => {
 test("ignore invalid token", () => {
   const callback = jest.fn()
 
-  const auth = {
+  const $auth = {
     strategies: {
       refresh: {
         token: {
@@ -202,7 +202,7 @@ test("ignore invalid token", () => {
     refreshTokens: callback,
   } as any
 
-  plugin({ $auth: auth })
+  plugin({ $auth })
 
   jest.runOnlyPendingTimers()
 
