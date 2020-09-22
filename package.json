@@ -1,6 +1,6 @@
 {
   "name": "nuxt-auth-auto-refresh",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "description": "Automatic (periodic) token refresh for nuxt auth",
   "author": "Ruben Gees <rubengees7@googlemail.com>",
   "license": "MIT",
