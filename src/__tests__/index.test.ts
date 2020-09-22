@@ -1,4 +1,3 @@
-import { Auth } from "@nuxtjs/auth-next"
 import jwt from "jsonwebtoken"
 import plugin from "../index"
 
