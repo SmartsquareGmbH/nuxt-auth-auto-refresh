@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken"
-import plugin from "../index"
+import plugin from "../src"
 
 jest.useFakeTimers()
 

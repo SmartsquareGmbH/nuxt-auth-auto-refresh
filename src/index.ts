@@ -1,4 +1,4 @@
-import { Auth, Scheme } from "@nuxtjs/auth-next"
+import { Auth, Scheme, TokenableScheme } from "@nuxtjs/auth-next"
 import jwtDecode from "jwt-decode"
 
 type AuthToken = {
@@ -27,11 +27,17 @@ function shouldRefresh(token: AuthToken): boolean {
   }
 }
 
+function isTokenableScheme(scheme: Scheme): scheme is TokenableScheme {
+  return "token" in scheme
+}
+
 export default function ({ $auth }: { $auth: Auth }) {
-  setInterval(() => {
+  setInterval(async () => {
     const strategies = $auth.strategies as { [key: string]: Scheme }
 
     const hasTokenToRefresh = Object.values(strategies).reduce((acc, scheme) => {
+      if (!isTokenableScheme(scheme)) return false
+
       const token = scheme.token
 
       if (token && !token?.status()?.expired()) {
@@ -42,7 +48,7 @@ export default function ({ $auth }: { $auth: Auth }) {
     }, false)
 
     if (hasTokenToRefresh) {
-      $auth.refreshTokens()
+      await $auth.refreshTokens()
     }
   }, 500)
 }
